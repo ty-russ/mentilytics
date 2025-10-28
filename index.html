@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentilytics Pitch Deck</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+        }
+
+        .deck-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            margin: 30px 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #999;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 56px;
+            color: #1a202c;
+            margin-bottom: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 42px;
+            color: #2d3748;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 28px;
+            color: #4a5568;
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+
+        p, li {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 15px;
+        }
+
+        .tagline {
+            font-size: 28px;
+            color: #667eea;
+            font-style: italic;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        .hero-slide {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .hero-slide h1 {
+            font-size: 72px;
+            color: white;
+            -webkit-text-fill-color: white;
+            margin-bottom: 30px;
+        }
+
+        .hero-slide .tagline {
+            color: rgba(255,255,255,0.9);
+            font-size: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #4a5568;
+            font-weight: 600;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:nth-child(even) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .feature-card:hover {
+            transform: scale(1.05);
+        }
+
+        .feature-card h3 {
+            color: white;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: rgba(255,255,255,0.9);
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        td {
+            padding: 15px 18px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 16px;
+        }
+
+        tr:hover {
+            background: #f7fafc;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #fdcb6e;
+        }
+
+        .highlight p {
+            font-size: 22px;
+            color: #2d3748;
+            margin: 0;
+        }
+
+        ul {
+            margin-left: 30px;
+            margin-top: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        li::marker {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .checkmark {
+            color: #48bb78;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .xmark {
+            color: #f56565;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .partial {
+            color: #ed8936;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .revenue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .revenue-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .revenue-card h3 {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .revenue-card .percentage {
+            font-size: 36px;
+            font-weight: 800;
+            margin: 10px 0;
+        }
+
+        .phase-card {
+            background: white;
+            border: 2px solid #667eea;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .phase-card h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+
+        .cta-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-slide h2 {
+            color: white;
+            font-size: 48px;
+        }
+
+        .cta-slide p {
+            color: rgba(255,255,255,0.9);
+            font-size: 24px;
+        }
+
+        .cta-slide .stat-card {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            border-left: 2px solid white;
+        }
+
+        .cta-slide .stat-number {
+            color: white;
+        }
+
+        .cta-slide .stat-label {
+            color: white;
+        }
+
+        .metric-bar {
+            background: #e2e8f0;
+            height: 12px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .metric-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 30px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 30px;
+            }
+            h1 {
+                font-size: 42px;
+            }
+            h2 {
+                font-size: 32px;
+            }
+            .chart-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="deck-container">
+        <!-- Slide 1: Hero -->
+        <div class="slide hero-slide">
+            <h1>🧠 Mentilytics</h1>
+            <p class="tagline">Where Data Meets Empathy</p>
+            <p style="margin-top: 40px; font-size: 24px;">AI-Powered Mental Health Platform for the Modern World</p>
+        </div>
+
+        <!-- Slide 2: Executive Summary -->
+        <div class="slide">
+            <span class="slide-number">02</span>
+            <h2>Executive Summary</h2>
+            <p><strong>Mentilytics</strong> is an AI-powered, data-driven mental health platform providing anonymous emotional support, personalized resources, and actionable insights.</p>
+            
+            <div class="stats-grid" style="margin-top: 40px;">
+                <div class="stat-card">
+                    <div class="stat-number">$90B+</div>
+                    <div class="stat-label">Total Market Size</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">16.5%</div>
+                    <div class="stat-label">Market CAGR</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$18M</div>
+                    <div class="stat-label">Y5 Revenue Target</div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <p><strong>Vision:</strong> Create a world where mental health care is intelligent, accessible, and stigma-free.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Problem -->
+        <div class="slide">
+            <span class="slide-number">03</span>
+            <h2>The Problem</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">1 in 4</div>
+                    <div class="stat-label">People face mental health challenges</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Never seek help</div>
+                </div>
+            </div>
+
+            <h3>Key Barriers:</h3>
+            <ul>
+                <li><strong>Stigma:</strong> Fear of judgment prevents people from reaching out</li>
+                <li><strong>Access:</strong> Limited availability of affordable, quality care</li>
+                <li><strong>Personalization:</strong> One-size-fits-all approaches don't work</li>
+                <li><strong>Data Gap:</strong> Institutions lack insights to address population-level trends</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: The Solution -->
+        <div class="slide">
+            <span class="slide-number">04</span>
+            <h2>Our Solution</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>💬 AI Chatbot</h3>
+                    <p>Anonymous text & voice support with empathy-trained NLP</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Analytics Dashboard</h3>
+                    <p>Data-driven insights for institutions & researchers</p>
+                </div>
+                <div class="feature-card">
+                    <h3>👥 Peer Support</h3>
+                    <p>AI-moderated anonymous group discussions</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⌚ Wearable Sync</h3>
+                    <p>Holistic tracking of stress, sleep & activity</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Personalized Resources</h3>
+                    <p>Adaptive recommendations & coping exercises</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🩺 AI Diagnostics</h3>
+                    <p>Screening tools with crisis escalation protocols</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Market Opportunity with Chart -->
+        <div class="slide">
+            <span class="slide-number">05</span>
+            <h2>Market Opportunity</h2>
+            
+            <div class="chart-container">
+                <canvas id="marketChart"></canvas>
+            </div>
+
+            <div class="highlight">
+                <p><strong>Total Addressable Market:</strong> $90B+ | <strong>5-Year Target:</strong> $100-150M</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Business Model -->
+        <div class="slide">
+            <span class="slide-number">06</span>
+            <h2>Revenue Streams</h2>
+            
+            <div class="chart-container">
+                <canvas id="revenueChart"></canvas>
+            </div>
+
+            <h3 style="margin-top: 40px;">Pricing Structure:</h3>
+            <ul>
+                <li><strong>Premium:</strong> $7.99/month</li>
+                <li><strong>Counseling:</strong> $25-50/session</li>
+                <li><strong>Institutional License:</strong> $10K-50K/year</li>
+            </ul>
+        </div>
+
+        <!-- Slide 7: Financial Projections with Chart -->
+        <div class="slide">
+            <span class="slide-number">07</span>
+            <h2>5-Year Financial Projections</h2>
+            
+            <div class="chart-container">
+                <canvas id="financialChart"></canvas>
+            </div>
+
+            <div class="stats-grid" style="margin-top: 30px;">
+                <div class="stat-card">
+                    <div class="stat-number">63%</div>
+                    <div class="stat-label">Revenue CAGR</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">38%</div>
+                    <div class="stat-label">IRR</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$12.7M</div>
+                    <div class="stat-label">NPV (10%)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Y2.5</div>
+                    <div class="stat-label">Break-Even</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: User Growth Chart -->
+        <div class="slide">
+            <span class="slide-number">08</span>
+            <h2>User Growth Trajectory</h2>
+            
+            <div class="chart-container">
+                <canvas id="userGrowthChart"></canvas>
+            </div>
+
+            <div class="highlight">
+                <p><strong>Target:</strong> 750K users by Year 5 with 10% paid conversion rate</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Go-To-Market Strategy -->
+        <div class="slide">
+            <span class="slide-number">09</span>
+            <h2>Go-To-Market Strategy</h2>
+            
+            <div class="phase-card">
+                <h3>📍 Phase 1 (0-6 months)</h3>
+                <ul>
+                    <li>Pilot with universities & youth communities</li>
+                    <li>Launch awareness campaign: "Talk Without Labels"</li>
+                    <li>Build core user base and gather feedback</li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <h3>🚀 Phase 2 (6-12 months)</h3>
+                <ul>
+                    <li>Launch public Beta with wearable integration</li>
+                    <li>Partner with NGOs and mental health organizations</li>
+                    <li>Expand feature set based on user data</li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <h3>🌍 Phase 3 (12-18 months)</h3>
+                <ul>
+                    <li>Scale to corporate wellness & HR programs</li>
+                    <li>Add multilingual support (EN, SW, HI, SP)</li>
+                    <li>Establish institutional partnerships</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 10: Competitive Advantage -->
+        <div class="slide">
+            <span class="slide-number">10</span>
+            <h2>Competitive Landscape</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>AI Chat</th>
+                        <th>Peer Support</th>
+                        <th>Wearables</th>
+                        <th>Analytics</th>
+                        <th>Counseling</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #f0f4ff;">
+                        <td><strong>Mentilytics</strong></td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td><span class="checkmark">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>BetterHelp</td>
+                        <td><span class="xmark">✗</span></td>
+                        <td><span class="xmark">✗</span></td>
+                        <td><span class="xmark">✗</span></td>
+                        <td><span class="xmark">✗</span></td>
+                        <td><span class="checkmark">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Woebot</td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td><span class="xmark">✗</span></td>
+                        <td><span class="xmark">✗</span></td>
+                        <td><span class="partial">⚠</span></td>
+                        <td><span class="xmark">✗</span></td>
+                    </tr>
+                    <tr>
+                        <td>Headspace</td>
+                        <td><span class="xmark">✗</span></td>
+                        <td><span class="xmark">✗</span></td>
+                        <td><span class="partial">⚠</span></td>
+                        <td><span class="xmark">✗</span></td>
+                        <td><span class="xmark">✗</span></td>
+                    </tr>
+                    <tr>
+                        <td>7Cups</td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td><span class="xmark">✗</span></td>
+                        <td><span class="xmark">✗</span></td>
+                        <td><span class="partial">⚠</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight" style="margin-top: 30px;">
+                <p><strong>Our Edge:</strong> The only platform combining AI empathy, peer support, wearable integration, institutional analytics, and professional counseling in one ecosystem.</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Impact Metrics -->
+        <div class="slide">
+            <span class="slide-number">11</span>
+            <h2>Impact & Key Metrics (12-Month Goals)</h2>
+            
+            <div style="margin: 30px 0;">
+                <h3>Active Users: 100,000</h3>
+                <div class="metric-bar">
+                    <div class="metric-fill" style="width: 100%"></div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Retention Rate: >35%</h3>
+                <div class="metric-bar">
+                    <div class="metric-fill" style="width: 35%"></div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Avg. Session Duration: 8-10 min</h3>
+                <div class="metric-bar">
+                    <div class="metric-fill" style="width: 80%"></div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Sentiment Accuracy: >90%</h3>
+                <div class="metric-bar">
+                    <div class="metric-fill" style="width: 90%"></div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Crisis Escalation Accuracy: >85%</h3>
+                <div class="metric-bar">
+                    <div class="metric-fill" style="width: 85%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Privacy & Ethics -->
+        <div class="slide">
+            <span class="slide-number">12</span>
+            <h2>Data Ethics & Privacy</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🔒 End-to-End Encryption</h3>
+                    <p>AES-256 encryption for all user data</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🕶️ Full Anonymity</h3>
+                    <p>No personal identifiers stored</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✅ Compliance</h3>
+                    <p>HIPAA & GDPR certified</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🤝 Transparency</h3>
+                    <p>Clear AI disclaimers & human handoff</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🌐 WHO-Aligned</h3>
+                    <p>Mental health ethics standards</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Anonymized Analytics</h3>
+                    <p>Aggregated insights only</p>
+                </div>
+            </div>
+
+            <div class="highlight" style="margin-top: 40px;">
+                <p><strong>Our Commitment:</strong> Privacy-first design that prioritizes user trust and data protection above all else.</p>
+            </div>
+        </div>
+
+        <!-- Slide 13: Technology Stack -->
+        <div class="slide">
+            <span class="slide-number">13</span>
+            <h2>Technology Stack</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Layer</th>
+                        <th>Technology</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Frontend (Mobile)</strong></td>
+                        <td>React Native / Flutter</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Frontend (Web)</strong></td>
+                        <td>Next.js</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Backend</strong></td>
+                        <td>Node.js, FastAPI, AWS Lambda</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI/ML</strong></td>
+                        <td>OpenAI GPT, HuggingFace, EmotionNet</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Storage</strong></td>
+                        <td>AWS HealthLake, MongoDB, BigQuery</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Security</strong></td>
+                        <td>AES-256 Encryption, HIPAA/GDPR</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="margin-top: 30px; font-size: 18px;"><strong>Architecture:</strong> Microservices-based, cloud-native design for scalability, security, and performance.</p>
+        </div>
+
+        <!-- Slide 14: Call to Action -->
+        <div class="slide cta-slide">
+            <h2>Join Us in Transforming Mental Health</h2>
+            <p style="margin: 40px 0;">Mentilytics combines AI empathy, anonymity, and analytics to deliver personalized, accessible, data-driven support.</p>
+            
+            <div class="stats-grid" style="margin-top: 50px;">
+                <div class="stat-card">
+                    <div class="stat-number">750K</div>
+                    <div class="stat-label">Users by Year 5</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$18M</div>
+                    <div class="stat-label">Revenue by Year 5</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$90B+</div>
+                    <div class="stat-label">Market Opportunity</div>
+                </div>
+            </div>
+
+            <p style="margin-top: 50px; font-size: 32px; font-weight: 600;">"Where Data Meets Empathy"</p>
+            <p style="margin-top: 30px; font-size: 20px;">Let's make mental health care intelligent, accessible, and stigma-free.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p style="font-size: 18px;">Thank you for your time and consideration.</p>
+            <p style="font-size: 16px; margin-top: 10px; opacity: 0.8;">Contact: team@mentilytics.com | www.mentilytics.com</p>
+        </div>
+    </div>
+
+    <script>
+        // Market Opportunity Chart
+        const marketCtx = document.getElementById('marketChart').getContext('2d');
+        new Chart(marketCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Mental Health Apps', 'Teletherapy', 'Wearable Analytics'],
+                datasets: [{
+                    label: 'Market Size ($B)',
+                    data: [6.2, 21, 64],
+                    backgroundColor: [
+                        'rgba(102, 126, 234, 0.8)',
+                        'rgba(118, 75, 162, 0.8)',
+                        'rgba(240, 147, 251, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(102, 126, 234, 1)',
+                        'rgba(118, 75, 162, 1)',
+                        'rgba(240, 147, 251, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Market Segments (2025)',
+                        font: { size: 18, weight: 'bold' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Market Size ($ Billions)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Revenue Streams Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Freemium (40%)', 'Teletherapy (30%)', 'B2B/Corporate (15%)', 'Research (10%)', 'Partnerships (5%)'],
+                datasets: [{
+                    data: [40, 30, 15, 10, 5],
+                    backgroundColor: [
+                        'rgba(102, 126, 234, 0.8)',
+                        'rgba(118, 75, 162, 0.8)',
+                        'rgba(240, 147, 251, 0.8)',
+                        'rgba(79, 172, 254, 0.8)',
+                        'rgba(253, 203, 110, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(102, 126, 234, 1)',
+                        'rgba(118, 75, 162, 1)',
+                        'rgba(240, 147, 251, 1)',
+                        'rgba(79, 172, 254, 1)',
+                        'rgba(253, 203, 110, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { font: { size: 14 } }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Revenue Distribution',
+                        font: { size: 18, weight: 'bold' }
+                    }
+                }
+            }
+        });
+
+        // Financial Projections Chart
+        const financialCtx = document.getElementById('financialChart').getContext('2d');
+        new Chart(financialCtx, {
+            type: 'line',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    {
+                        label: 'Revenue ($M)',
+                        data: [0.6, 2.5, 6.8, 12.0, 18.0],
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Profit ($M)',
+                        data: [-0.2, 0.9, 3.6, 6.9, 10.7],
+                        borderColor: 'rgba(72, 187, 120, 1)',
+                        backgroundColor: 'rgba(72, 187, 120, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Costs ($M)',
+                        data: [0.8, 1.6, 3.2, 5.1, 7.3],
+                        borderColor: 'rgba(245, 101, 101, 1)',
+                        backgroundColor: 'rgba(245, 101, 101, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { font: { size: 14 } }
+                    },
+                    title: {
+                        display: true,
+                        text: '5-Year Financial Trajectory',
+                        font: { size: 18, weight: 'bold' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Amount ($ Millions)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // User Growth Chart
+        const userGrowthCtx = document.getElementById('userGrowthChart').getContext('2d');
+        new Chart(userGrowthCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    {
+                        label: 'Total Users (K)',
+                        data: [30, 100, 300, 500, 750],
+                        backgroundColor: 'rgba(102, 126, 234, 0.6)',
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Paid Users (K)',
+                        data: [3, 10, 30, 50, 75],
+                        backgroundColor: 'rgba(240, 147, 251, 0.6)',
+                        borderColor: 'rgba(240, 147, 251, 1)',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { font: { size: 14 } }
+                    },
+                    title: {
+                        display: true,
+                        text: 'User Base Growth Projection',
+                        font: { size: 18, weight: 'bold' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Users (Thousands)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Smooth scroll reveal animation
+        const slides = document.querySelectorAll('.slide');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        slides.forEach(slide => {
+            observer.observe(slide);
+        });
+
+        // Animate metric bars on scroll
+        const metricBars = document.querySelectorAll('.metric-fill');
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.style.width;
+                    entry.target.style.width = '0%';
+                    setTimeout(() => {
+                        entry.target.style.width = width;
+                    }, 100);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        metricBars.forEach(bar => {
+            barObserver.observe(bar);
+        });
+    </script>
+</body>
+</html>
