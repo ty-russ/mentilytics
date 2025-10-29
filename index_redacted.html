@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentilytics Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        h3 {
+            font-size: 1.8em;
+            margin: 20px 0 10px;
+            color: #a8daff;
+        }
+
+        p, li {
+            font-size: 1.3em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .tagline {
+            font-size: 1.8em;
+            font-style: italic;
+            color: #ffd700;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .stat {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ffd700;
+            margin: 10px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li::before {
+            content: "→ ";
+            color: #ffd700;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .slide-number {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            font-size: 1.2em;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        th {
+            background: rgba(255, 215, 0, 0.3);
+            font-weight: bold;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .risk-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 5px;
+        }
+
+        .risk-high {
+            background: rgba(255, 100, 100, 0.3);
+            border: 1px solid rgba(255, 100, 100, 0.5);
+        }
+
+        .risk-medium {
+            background: rgba(255, 200, 100, 0.3);
+            border: 1px solid rgba(255, 200, 100, 0.5);
+        }
+
+        .risk-low {
+            background: rgba(100, 255, 150, 0.3);
+            border: 1px solid rgba(100, 255, 150, 0.5);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            margin: 20px 0;
+            padding-left: 30px;
+            border-left: 3px solid #ffd700;
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .metric-box {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(255, 215, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-number" id="slideNumber">1 / 18</div>
+
+    <div class="container">
+        <!-- Slide 1: Cover -->
+        <div class="slide active">
+            <div class="center">
+                <div class="logo"></div>
+                <h1>Mentilytics</h1>
+                <p class="tagline">"Where Data Meets Empathy"</p>
+                <p style="font-size: 1.5em; margin-top: 40px;">AI-Powered Mental Health Intelligence</p>
+                <!-- <p style="font-size: 1.2em; margin-top: 20px; opacity: 0.9;">Series Pre-Seed | $1.2M Raise</p> -->
+            </div>
+        </div>
+
+        <!-- Slide 2: The Problem -->
+        <div class="slide">
+            <h2>The Mental Health Crisis is Invisible Until It's Not</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>The Scale</h3>
+                    <p class="stat">1 in 4</p>
+                    <p>People globally will experience a mental health condition</p>
+                </div>
+                <div class="card">
+                    <h3>The Cost</h3>
+                    <p class="stat">$280B</p>
+                    <p>Annual cost of workplace mental health issues in the US alone</p>
+                </div>
+                <div class="card">
+                    <h3>The Gap</h3>
+                    <p class="stat">11 years</p>
+                    <p>Average delay between symptom onset and treatment</p>
+                </div>
+                <div class="card">
+                    <h3>The Burden</h3>
+                    <p class="stat">77%</p>
+                    <p>Of employers report mental health as their top workforce concern</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Why Now -->
+        <div class="slide">
+            <h2>Why Now? The Perfect Storm</h2>
+            <div style="margin-top: 40px;">
+                <div class="timeline-item">
+                    <h3>Burnout Epidemic</h3>
+                    <p>Post-pandemic workplace stress at all-time highs. Remote work blurs boundaries. Gen Z entering workforce with different mental health expectations.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>AI Maturity</h3>
+                    <p>GPT-4 level empathy enables human-like conversations. Sentiment analysis achieves 90%+ accuracy. Edge computing allows real-time processing.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Corporate Budgets</h3>
+                    <p>Wellness spending up 30% YoY. ESG mandates require employee wellbeing metrics. HR tech budgets prioritizing mental health solutions.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Wearable Ubiquity</h3>
+                    <p>50% of US adults wear health trackers. Apple Health, Fitbit APIs mature. Stress detection via HRV now consumer-grade.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Solution Overview -->
+        <div class="slide">
+            <h2>Our Solution: The Mental Health Intelligence Platform</h2>
+            <p class="tagline">Anonymous AI + Predictive Analytics + Human Safety Net</p>
+            <div class="grid grid-3" style="margin-top: 40px;">
+                <div class="card">
+                    <h3>AI Emotional Support</h3>
+                    <p>HIPAA-compliant chatbot trained on clinical CBT frameworks. Available 24/7. Zero stigma.</p>
+                </div>
+                <div class="card">
+                    <h3>Predictive Insights</h3>
+                    <p>Burnout risk scores. Sentiment trends. Population-level analytics for HR teams.</p>
+                </div>
+                <div class="card">
+                    <h3>Smart Escalation</h3>
+                    <p>Crisis detection routes to human professionals. Integration with EAPs and local resources.</p>
+                </div>
+                <div class="card">
+                    <h3>Peer Communities</h3>
+                    <p>AI-moderated support groups. Anonymous connection. Shared experiences.</p>
+                </div>
+                <div class="card">
+                    <h3>Wearable Integration</h3>
+                    <p>Correlates stress biomarkers with mood. Sleep, HRV, activity tracking.</p>
+                </div>
+                <div class="card">
+                    <h3>Enterprise Dashboard</h3>
+                    <p>Aggregated, anonymized insights. ROI metrics. Compliance reporting.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: How It Works -->
+        <div class="slide">
+            <h2>The Mentilytics Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Day 1: Employee Access</h3>
+                    <p>Sarah's company offers Mentilytics as a benefit. She downloads the app—completely anonymous, no name required.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Day 3: First Conversation</h3>
+                    <p>After a stressful project, Sarah chats with the AI. It asks reflective questions, suggests breathing exercises, validates her feelings.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Week 2: Pattern Recognition</h3>
+                    <p>Her Apple Watch data shows elevated stress on Mondays. The AI suggests: "I notice your stress peaks at week start. Want to explore why?"</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Week 4: Peer Connection</h3>
+                    <p>Sarah joins an anonymous group for working parents. Finds others facing similar challenges. Shares coping strategies.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Month 3: Crisis Averted</h3>
+                    <p>Sarah's burnout score triggers an alert. System recommends she speaks with the company EAP. She gets professional help early.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Quarter 1: HR Insights</h3>
+                    <p>Leadership sees anonymized data: 15% of engineering showing burnout signals. They adjust sprint schedules. Turnover drops 22%.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Market Opportunity -->
+        <!-- <div class="slide">
+            <h2>Massive Market, Perfect Timing</h2>
+            <div class="flex-between" style="margin: 40px 0;">
+                <div style="flex: 1;">
+                    <p class="stat">$180B</p>
+                    <p>Digital Mental Health Market by 2035</p>
+                    <p style="margin-top: 20px; font-size: 1.1em;">CAGR: 18.5%</p>
+                </div>
+                <div style="flex: 1;">
+                    <p class="stat">$96B</p>
+                    <p>Corporate Wellness Market by 2030</p>
+                    <p style="margin-top: 20px; font-size: 1.1em;">CAGR: 7.8%</p>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 40px;">
+                <h3>Our Beachhead: Mid-Market Enterprises</h3>
+                <ul style="margin-top: 20px;">
+                    <li>500-5,000 employees (70,000 companies in US)</li>
+                    <li>$50-200K annual wellness budgets per company</li>
+                    <li>Underserved by enterprise-only players (Lyra, Spring Health)</li>
+                    <li>Too sophisticated for consumer apps (Calm, Headspace)</li>
+                    <li>Desperate for data-driven solutions with ROI proof</li>
+                </ul>
+            </div>
+        </div> -->
+
+        <!-- Slide 7: Business Model -->
+        <!-- <div class="slide">
+            <h2>B2B-First Revenue Model</h2>
+            <table style="margin-top: 30px;">
+                <tr>
+                    <th>Revenue Stream</th>
+                    <th>Pricing</th>
+                    <th>Year 5 Mix</th>
+                </tr>
+                <tr>
+                    <td><strong>Enterprise SaaS Licenses</strong><br>Annual contracts, per-employee pricing</td>
+                    <td>$8-15 per employee/year<br>(500-5,000 employees)</td>
+                    <td>50%</td>
+                </tr>
+                <tr>
+                    <td><strong>Premium Features</strong><br>Advanced analytics, custom integrations</td>
+                    <td>$20K-50K add-on</td>
+                    <td>20%</td>
+                </tr>
+                <tr>
+                    <td><strong>Teletherapy Marketplace</strong><br>Revenue share with licensed providers</td>
+                    <td>15% commission on sessions<br>($40-60 per session)</td>
+                    <td>15%</td>
+                </tr>
+                <tr>
+                    <td><strong>Consumer Subscriptions</strong><br>Individual users (post Year 2)</td>
+                    <td>$9.99/month</td>
+                    <td>10%</td>
+                </tr>
+                <tr>
+                    <td><strong>Research & Grants</strong><br>Anonymized data partnerships</td>
+                    <td>Case-by-case</td>
+                    <td>5%</td>
+                </tr>
+            </table>
+            <div class="metric-box" style="margin-top: 30px;">
+                <p><strong>Target Unit Economics (Year 3)</strong></p>
+                <p>CAC: $3,000 per enterprise | LTV: $18,000+ | LTV:CAC = 6:1 | Gross Margin: 78%</p>
+            </div>
+        </div> -->
+
+        <!-- Slide 8: Go-to-Market -->
+        <!-- <div class="slide">
+            <h2>Enterprise-Led GTM Strategy</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Phase 1: Pilot Partnerships (Months 6-12)</h3>
+                    <ul>
+                        <li>3-5 beta customers (universities + mid-size cos)</li>
+                        <li>90-day free trials + success metrics</li>
+                        <li>Case studies & ROI proof points</li>
+                        <li>Clinical validation study with university partner</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Phase 2: Direct Sales (Months 12-24)</h3>
+                    <ul>
+                        <li>Build 3-person sales team (HR tech veterans)</li>
+                        <li>Target: Tech, professional services, healthcare</li>
+                        <li>Conference presence (SHRM, HR Tech)</li>
+                        <li>Broker/consultant partnerships</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Phase 3: Channel Expansion (Months 24-36)</h3>
+                    <ul>
+                        <li>EAP provider integrations (ComPsych, Lifeworks)</li>
+                        <li>Benefits platform partnerships (Namely, Zenefits)</li>
+                        <li>Insurance carrier pilots (Aetna, Cigna)</li>
+                        <li>Consumer waitlist → B2C soft launch</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Phase 4: Scale (Year 3+)</h3>
+                    <ul>
+                        <li>Enterprise segment (5,000+ employees)</li>
+                        <li>International expansion (UK, Canada, EU)</li>
+                        <li>Vertical-specific solutions (healthcare, education)</li>
+                        <li>White-label licensing opportunities</li>
+                    </ul>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Slide 9: Competitive Landscape -->
+        <div class="slide">
+            <h2>We Play Where Others Can't</h2>
+            <table style="font-size: 1.1em;">
+                <tr>
+                    <th>Competitor</th>
+                    <th>Model</th>
+                    <th>Our Advantage</th>
+                </tr>
+                <tr>
+                    <td><strong>BetterHelp / Talkspace</strong><br>$7B+ valuations</td>
+                    <td>Therapy marketplace</td>
+                    <td>We offer preventive AI layer + B2B analytics they lack</td>
+                </tr>
+                <tr>
+                    <td><strong>Lyra / Spring Health</strong><br>Enterprise mental health</td>
+                    <td>High-touch, expensive<br>($50+ PEPM)</td>
+                    <td>We're 3-5x cheaper with AI-first approach for mid-market</td>
+                </tr>
+                <tr>
+                    <td><strong>Calm / Headspace</strong><br>Wellness giants</td>
+                    <td>Meditation content</td>
+                    <td>We're clinical-grade with predictive analytics, not just relaxation</td>
+                </tr>
+                <tr>
+                    <td><strong>Woebot / Wysa</strong><br>AI chatbots</td>
+                    <td>B2C focus, no analytics</td>
+                    <td>We combine AI chat + enterprise dashboard + peer support</td>
+                </tr>
+                <tr>
+                    <td><strong>Modern Health</strong><br>Closest comp</td>
+                    <td>Hybrid therapy + coaching</td>
+                    <td>We add wearable integration + predictive burnout detection</td>
+                </tr>
+            </table>
+            <div class="card" style="margin-top: 30px;">
+                <h3>Our Unique Position</h3>
+                <p><strong>The only platform combining:</strong> Anonymous AI emotional support + Real-time biometric integration + Enterprise-grade predictive analytics + Peer community support</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Product Roadmap -->
+        <!-- <div class="slide">
+            <h2>Phased Product Development</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Months 0-6: Safety-First MVP ($450K)</h3>
+                    <p><strong>Build:</strong> Text-only AI chatbot (GPT-4 fine-tuned) • Basic sentiment tracking (PHQ-2/GAD-2) • Crisis escalation to hotlines • HIPAA infrastructure (AWS HealthLake) • IRB-approved pilot study (n=300)</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Months 6-12: Enterprise Features ($350K)</h3>
+                    <p><strong>Add:</strong> Corporate analytics dashboard • Peer support groups (AI moderation) • Wearable API integration (Apple, Fitbit) • EAP provider integrations • Clinical validation publication</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Months 12-18: Intelligence Layer ($400K)</h3>
+                    <p><strong>Add:</strong> Predictive burnout index • Voice interaction support • Emotion visualization dashboard • Cognitive reframing assistant (CBT-based) • Advanced HR analytics</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Months 18-30: Scale & Expand (Series A: $3-5M)</h3>
+                    <p><strong>Add:</strong> Consumer app version • Therapist marketplace • Music therapy engine • Multilingual support (Spanish, Hindi) • International compliance (GDPR, UK NHS integration)</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Months 30+: Advanced AI (Series B)</h3>
+                    <p><strong>R&D:</strong> Multimodal emotion detection (face + voice) • VR immersive therapy experiences • Genomics-informed recommendations • Population health prediction models</p>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Slide 11: Traction & Validation -->
+        <!-- <div class="slide">
+            <h2>Early Validation Signals</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>✅ Customer Discovery</h3>
+                    <p class="stat">52 interviews</p>
+                    <p>HR leaders, employees, clinicians</p>
+                    <ul style="margin-top: 15px;">
+                        <li>78% of HR leaders would pilot at $10 PEPM</li>
+                        <li>65% of employees want anonymous mental health support</li>
+                        <li>3 Letters of Intent from universities (10K-25K students each)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>✅ Advisory Board</h3>
+                    <p>Assembled 5-person advisory board:</p>
+                    <ul style="margin-top: 15px;">
+                        <li>Dr. Jane Smith - Clinical Psychologist, Harvard Medical</li>
+                        <li>Prof. John Doe - AI Ethics, MIT</li>
+                        <li>Sarah Johnson - Former Lyra Health VP Sales</li>
+                        <li>Michael Chen - Healthcare Data Privacy Attorney</li>
+                        <li>Dr. Emily Brown - Psychiatrist, Crisis Intervention Expert</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>✅ Technical Proof</h3>
+                    <p class="stat">89% accuracy</p>
+                    <p>Sentiment detection on test dataset</p>
+                    <ul style="margin-top: 15px;">
+                        <li>Prototype chatbot tested with 200 volunteers</li>
+                        <li>4.2/5 average satisfaction score</li>
+                        <li>Zero safety incidents in testing</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>✅ Regulatory Clarity</h3>
+                    <p>Legal pathway validated:</p>
+                    <ul style="margin-top: 15px;">
+                        <li>Positioned as "wellness tool" avoids FDA Class II</li>
+                        <li>HIPAA compliance roadmap approved by counsel</li>
+                        <li>Partnership discussions with 2 crisis hotlines</li>
+                        <li>University IRB pre-approval for validation study</li>
+                    </ul>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Slide 12: Financial Projections -->
+        <!-- <div class="slide">
+            <h2>Conservative Financial Model</h2>
+            <table style="font-size: 1.05em;">
+                <tr>
+                    <th>Metric</th>
+                    <th>Year 1</th>
+                    <th>Year 2</th>
+                    <th>Year 3</th>
+                    <th>Year 4</th>
+                    <th>Year 5</th>
+                </tr>
+                <tr>
+                    <td><strong>Enterprise Customers</strong></td>
+                    <td>5</td>
+                    <td>15</td>
+                    <td>40</td>
+                    <td>85</td>
+                    <td>150</td>
+                </tr>
+                <tr>
+                    <td><strong>Avg Employees/Customer</strong></td>
+                    <td>2,000</td>
+                    <td>2,300</td>
+                    <td>2,500</td>
+                    <td>2,800</td>
+                    <td>3,000</td>
+                </tr>
+                <tr>
+                    <td><strong>Total Covered Lives</strong></td>
+                    <td>10,000</td>
+                    <td>34,500</td>
+                    <td>100,000</td>
+                    <td>238,000</td>
+                    <td>450,000</td>
+                </tr>
+                <tr>
+                    <td><strong>Revenue ($M)</strong></td>
+                    <td>$0.12</td>
+                    <td>$0.52</td>
+                    <td>$1.8</td>
+                    <td>$4.3</td>
+                    <td>$8.5</td>
+                </tr>
+                <tr>
+                    <td><strong>Gross Margin</strong></td>
+                    <td>45%</td>
+                    <td>62%</td>
+                    <td>74%</td>
+                    <td>78%</td>
+                    <td>80%</td>
+                </tr>
+                <tr>
+                    <td><strong>Operating Expenses ($M)</strong></td>
+                    <td>$1.4</td>
+                    <td>$2.1</td>
+                    <td>$3.2</td>
+                    <td>$4.8</td>
+                    <td>$6.4</td>
+                </tr>
+                <tr>
+                    <td><strong>EBITDA ($M)</strong></td>
+                    <td>-$1.35</td>
+                    <td>-$1.78</td>
+                    <td>-$1.87</td>
+                    <td>-$1.44</td>
+                    <td>$+0.4</td>
+                </tr>
+                <tr>
+                    <td><strong>Cumulative Raised</strong></td>
+                    <td>$1.2M</td>
+                    <td>$1.2M</td>
+                    <td>$5.2M</td>
+                    <td>$5.2M</td>
+                    <td>$13.2M</td>
+                </tr>
+            </table>
+            <div class="flex-between" style="margin-top: 30px;">
+                <div class="metric-box" style="flex: 1;">
+                    <p style="font-size: 1.2em;">Break-Even</p>
+                    <p class="stat" style="font-size: 2em;">Month 52</p>
+                </div>
+                <div class="metric-box" style="flex: 1;">
+                    <p style="font-size: 1.2em;">ARR at Series B</p>
+                    <p class="stat" style="font-size: 2em;">$5.2M</p>
+                </div>
+                <div class="metric-box" style="flex: 1;">
+                    <p style="font-size: 1.2em;">Total Capital to Profitability</p>
+                    <p class="stat" style="font-size: 2em;">$13.2M</p>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Slide 13: Unit Economics -->
+        <!-- <div class="slide">
+            <h2>Enterprise SaaS Economics at Scale</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Customer Acquisition (Year 3)</h3>
+                    <p><strong>Sales Cycle:</strong> 3-6 months average</p>
+                    <p><strong>CAC Breakdown:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>Sales team salary: $1,200/customer</li>
+                        <li>Marketing: $800/customer</li>
+                        <li>Demos & pilots: $600/customer</li>
+                        <li>Implementation: $400/customer</li>
+                    </ul>
+                    <p class="stat" style="margin-top: 15px;">$3,000</p>
+                    <p style="text-align: center;">Total CAC</p>
+                </div>
+                <div class="card">
+                    <h3>Customer Lifetime Value</h3>
+                    <p><strong>Annual Contract:</strong> $12K-15K (avg $13.5K)</p>
+                    <p><strong>Avg Customer Life:</strong> 3.5 years</p>
+                    <p><strong>Gross Margin:</strong> 78%</p>
+                    <p><strong>Expansion Revenue:</strong> +25% Year 2</p>
+                    <p class="stat" style="margin-top: 15px;">$18,500</p>
+                    <p style="text-align: center;">LTV</p>
+                </div>
+            </div>
+            <div class="metric-box" style="margin-top: 30px;">
+                <h3>Key Metrics Dashboard</h3>
+                <div class="grid grid-3" style="margin-top: 20px;">
+                    <div>
+                        <p style="font-size: 1.1em;">LTV:CAC Ratio</p>
+                        <p class="stat" style="font-size: 2.5em;">6.2:1</p>
+                    </div>
+                    <div>
+                        <p style="font-size: 1.1em;">Payback Period</p>
+                        <p class="stat" style="font-size: 2.5em;">8 months</p>
+                    </div>
+                    <div>
+                        <p style="font-size: 1.1em;">Net Revenue Retention</p>
+                        <p class="stat" style="font-size: 2.5em;">115%</p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Slide 14: Risk Mitigation -->
+        <!-- <div class="slide">
+            <h2>Risk Management Framework</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Clinical Safety <span class="risk-badge risk-high">HIGH RISK</span></h3>
+                    <p><strong>Risk:</strong> AI gives harmful advice or misses suicide risk</p>
+                    <p><strong>Mitigation:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>Response constraint framework (no medication/diagnosis claims)</li>
+                        <li>24/7 human escalation team (outsourced to crisis experts)</li>
+                        <li>Keyword triggers → immediate human handoff</li>
+                        <li>Quarterly safety audits by clinical advisory board</li>
+                        <li>$2M malpractice insurance coverage</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Regulatory <span class="risk-badge risk-medium">MEDIUM RISK</span></h3>
+                    <p><strong>Risk:</strong> FDA reclassification or HIPAA violations</p>
+                    <p><strong>Mitigation:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>Positioned as "wellness tool" not diagnostic device</li>
+                        <li>Ongoing legal counsel ($8K/month retainer)</li>
+                        <li>SOC 2 Type II + HIPAA certification (Year 1)</li>
+                        <li>Compliance officer hire at $150K ARR milestone</li>
+                        <li>Annual third-party security audits</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Data Security <span class="risk-badge risk-high">HIGH RISK</span></h3>
+                    <p><strong>Risk:</strong> Mental health data breach = catastrophic</p>
+                    <p><strong>Mitigation:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>Zero-knowledge encryption architecture</li>
+                        <li>No PII stored (anonymous by design)</li>
+                        <li>Penetration testing quarterly ($40K/year)</li>
+                        <li>Cyber liability insurance ($200K coverage)</li>
+                        <li>AWS GovCloud for federal customers</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>AI Bias <span class="risk-badge risk-medium">MEDIUM RISK</span></h3>
+                    <p><strong>Risk:</strong> Model trained on non-diverse populations</p>
+                    <p><strong>Mitigation:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>Diverse training data partnerships (NIMH, international datasets)</li>
+                        <li>Cultural consultants for each expansion market</li>
+                        <li>Continuous bias monitoring dashboard</li>
+                        <li>User feedback loop for model improvements</li>
+                        <li>Multilingual support by Year 3</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Sales Execution <span class="risk-badge risk-medium">MEDIUM RISK</span></h3>
+                    <p><strong>Risk:</strong> Long enterprise sales cycles delay revenue</p>
+                    <p><strong>Mitigation:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>Hire experienced HR tech sales leader (done in Month 6)</li>
+                        <li>Pilot-to-paid conversion incentives (90-day trials)</li>
+                        <li>Channel partnerships (brokers, EAPs) for distribution</li>
+                        <li>ROI calculator tool for sales enablement</li>
+                        <li>Case studies + clinical validation publication</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Competition <span class="risk-badge risk-low">LOW RISK</span></h3>
+                    <p><strong>Risk:</strong> Incumbents copy our model</p>
+                    <p><strong>Mitigation:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>12-18 month technical/clinical validation moat</li>
+                        <li>Enterprise customer lock-in (3-year contracts)</li>
+                        <li>Proprietary burnout prediction algorithms</li>
+                        <li>Network effects from peer community data</li>
+                        <li>Speed to market advantage (B2B focus vs their B2C)</li>
+                    </ul>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Slide 15: Founding Team -->
+        <!-- <div class="slide">
+            <h2>Team: Domain Expertise Meets Execution</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>👔 CEO: [Your Name]</h3>
+                    <p><strong>Background:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>MBA, [University]</li>
+                        <li>5 years in health tech product management</li>
+                        <li>Previously: Product Lead at [Health Startup], scaled to $10M ARR</li>
+                        <li>Deep domain expertise in digital health regulations</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🧠 Chief Clinical Officer: [Seeking]</h3>
+                    <p><strong>Target Profile:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>PhD Clinical Psychology or MD Psychiatry</li>
+                        <li>Licensed clinician with 10+ years experience</li>
+                        <li>Prior digital health startup experience preferred</li>
+                        <li>Published research in CBT or digital interventions</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><span class="risk-badge risk-medium">Active Search - 2 finalists</span></p>
+                </div>
+                <div class="card">
+                    <h3>💻 CTO: [Seeking]</h3>
+                    <p><strong>Target Profile:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>10+ years engineering, 5+ in ML/AI</li>
+                        <li>Experience building HIPAA-compliant systems</li>
+                        <li>Background in NLP or conversational AI</li>
+                        <li>Prior startup CTO or VP Engineering role</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><span class="risk-badge risk-medium">Active Search - 3 candidates in pipeline</span></p>
+                </div>
+                <div class="card">
+                    <h3>📊 Advisors (Committed)</h3>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>Dr. Jane Smith</strong> - Clinical Psychologist, Harvard Medical School</li>
+                        <li><strong>Sarah Johnson</strong> - Former VP Sales, Lyra Health</li>
+                        <li><strong>Prof. John Doe</strong> - AI Ethics, MIT CSAIL</li>
+                        <li><strong>Michael Chen</strong> - Healthcare Privacy Attorney</li>
+                        <li><strong>Dr. Emily Brown</strong> - Suicide Prevention Expert</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 30px;">
+                <h3>📍 Hiring Roadmap (18 Months)</h3>
+                <p><strong>With $1.2M raise:</strong> 2 co-founders + 3 engineers + 1 product designer + 1 clinical safety lead = 7 FTEs by Month 12</p>
+                <p><strong>With Series A ($3-5M):</strong> +2 sales reps + 1 customer success manager + 2 engineers + 1 data scientist = 13 FTEs by Month 24</p>
+            </div>
+        </div> -->
+
+        <!-- Slide 16: Investment Ask -->
+        <!-- <div class="slide">
+            <h2>The Ask: Pre-Seed Round</h2>
+            <div class="flex-between" style="margin: 40px 0;">
+                <div style="flex: 1;">
+                    <p class="stat">$1.2M</p>
+                    <p style="font-size: 1.5em;">Raising</p>
+                </div>
+                <div style="flex: 1;">
+                    <p class="stat">18 months</p>
+                    <p style="font-size: 1.5em;">Runway</p>
+                </div>
+                <div style="flex: 1;">
+                    <p class="stat">$8M</p>
+                    <p style="font-size: 1.5em;">Post-Money Valuation</p>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 30px;">
+                <h3>💰 Use of Funds</h3>
+                <table style="margin-top: 20px;">
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>%</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Team</strong></td>
+                        <td>$550K</td>
+                        <td>46%</td>
+                        <td>3 co-founders + 3 engineers + designer (18 months)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Product Development</strong></td>
+                        <td>$280K</td>
+                        <td>23%</td>
+                        <td>HIPAA infrastructure, AI fine-tuning, cloud costs, APIs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Clinical Validation</strong></td>
+                        <td>$150K</td>
+                        <td>13%</td>
+                        <td>IRB study, safety audits, clinical advisory board</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Compliance & Legal</strong></td>
+                        <td>$120K</td>
+                        <td>10%</td>
+                        <td>SOC 2, HIPAA certification, legal counsel, insurance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pilot Programs</strong></td>
+                        <td>$70K</td>
+                        <td>6%</td>
+                        <td>Beta customer implementation, success tracking</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operations</strong></td>
+                        <td>$30K</td>
+                        <td>3%</td>
+                        <td>Incorporation, accounting, HR, office</td>
+                    </tr>
+                </table>
+            </div>
+        </div> -->
+
+        <!-- Slide 17: Milestones -->
+        <!-- <div class="slide">
+            <h2>Milestones to Series A</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Month 6: MVP Launch</h3>
+                    <p><strong>Deliverables:</strong> Text-only chatbot live • HIPAA infrastructure operational • IRB study approved • 2 co-founders hired</p>
+                    <p><strong>Metrics:</strong> 300 pilot users enrolled • Safety protocols tested • Zero clinical incidents</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Month 12: Pilot Validation</h3>
+                    <p><strong>Deliverables:</strong> 5 enterprise pilots completed • Clinical validation study results • First paid customers • Analytics dashboard beta</p>
+                    <p><strong>Metrics:</strong> 3+ pilots convert to paid • Peer-reviewed paper submitted • 10,000 total sessions processed</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Month 18: Product-Market Fit</h3>
+                    <p><strong>Deliverables:</strong> 15 paying customers • Wearable integration live • Peer groups launched • Sales playbook validated</p>
+                    <p><strong>Metrics:</strong> $500K ARR • 80%+ customer retention • NPS 50+ • 50,000 covered lives</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Month 24: Series A Readiness 🎯</h3>
+                    <p><strong>Target Metrics for $3-5M raise:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>$1.5-2M ARR with clear path to $5M within 12 months</li>
+                        <li>40+ enterprise customers across 3+ verticals</li>
+                        <li>Net Revenue Retention >110%</li>
+                        <li>Published clinical efficacy data</li>
+                        <li>Proven LTV:CAC >5:1 at scale</li>
+                        <li>Team of 13 with strong sales leader in place</li>
+                    </ul>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Slide 18: Vision -->
+        <div class="slide">
+            <h2>The Vision: Mental Health Operating System</h2>
+            <div class="card" style="margin: 30px 0;">
+                <h3>5-Year Vision</h3>
+                <p style="font-size: 1.3em; margin-top: 20px;">
+                    By 2030, Mentilytics becomes the <strong>infrastructure layer</strong> for workplace mental health globally—
+                    preventing 1 million burnout cases, supporting 10 million employees, and generating population-level 
+                    insights that reshape how organizations understand and support human wellbeing.
+                </p>
+            </div>
+            <div class="grid" style="margin-top: 40px;">
+                <div class="card">
+                    <h3>For Organizations</h3>
+                    <p>Mental health goes from reactive cost center to predictive workforce intelligence</p>
+                    <ul style="margin-top: 15px;">
+                        <li>Early warning system for burnout and attrition</li>
+                        <li>Data-driven interventions with measurable ROI</li>
+                        <li>Culture of psychological safety and transparency</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>For Individuals</h3>
+                    <p>Mental health support becomes as accessible and stigma-free as physical fitness tracking</p>
+                    <ul style="margin-top: 15px;">
+                        <li>Always-available emotional support without judgment</li>
+                        <li>Self-awareness through data and insights</li>
+                        <li>Connection with peers facing similar challenges</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>For Society</h3>
+                    <p>First comprehensive dataset on population mental health trends</p>
+                    <ul style="margin-top: 15px;">
+                        <li>Inform public health policy with real-time data</li>
+                        <li>Advance research on preventive interventions</li>
+                        <li>Reduce global burden of mental illness</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>For Healthcare</h3>
+                    <p>Bridge the gap between self-care and clinical treatment</p>
+                    <ul style="margin-top: 15px;">
+                        <li>Triage and reduce burden on therapists</li>
+                        <li>Catch problems earlier when treatment is easier</li>
+                        <li>Integrate preventive care into broader health ecosystem</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- <div class="metric-box" style="margin-top: 40px;">
+                <h3>Exit Potential</h3>
+                <p style="font-size: 1.2em; margin-top: 15px;">
+                    <strong>Strategic Acquirers:</strong> Teladoc, UnitedHealth/Optum, Cigna, Oracle Health, Microsoft (Nuance), Google Health
+                </p>
+                <p style="font-size: 1.2em; margin-top: 10px;">
+                    <strong>Comparable Exits:</strong> Livongo ($18.5B to Teladoc) • Ginger ($400M to Headspace) • Talkspace (SPAC $1.4B)
+                </p>
+            </div> -->
+        </div>
+
+        <!-- Slide 19: Closing -->
+        <div class="slide">
+            <div class="center">
+                <h1 style="font-size: 3em; margin-bottom: 30px;">Mental Health is Healthcare's Last Frontier</h1>
+                <p class="tagline" style="font-size: 1.8em;">We're building the intelligence layer to make it accessible, measurable, and preventive.</p>
+                
+                <div class="grid" style="margin: 60px 0; text-align: left;">
+                    <div class="card">
+                        <h3>Market: $180B+ by 2035</h3>
+                        <p>Massive TAM with corporate wellness fastest-growing segment</p>
+                    </div>
+                    <div class="card">
+                        <h3>Timing: Post-Pandemic Urgency</h3>
+                        <p>Burnout epidemic + mature AI + employer budget priority</p>
+                    </div>
+                    <div class="card">
+                        <h3>Product: Unique Combination</h3>
+                        <p>Only platform merging AI + analytics + peer support + safety</p>
+                    </div>
+                    <div class="card">
+                        <h3>Business Model: B2B-First</h3>
+                        <p>Validated enterprise demand with clear path to $10M+ ARR</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 40px; background: rgba(255, 215, 0, 0.2); border: 2px solid #ffd700;">
+                    <h2 style="margin-bottom: 20px; color: #ffd700;">Join Us in Reshaping Mental Health</h2>
+                    <!-- <p style="font-size: 1.4em;">$1.2M Pre-Seed • 18-Month Runway • Clear Path to Series A</p> -->
+                    <p style="font-size: 1.2em; margin-top: 20px;">Contact: [founder@mentilytics.com] • [www.mentilytics.com]</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Appendix Cover -->
+        <div class="slide">
+            <div class="center">
+                <h1>Appendix</h1>
+                <p style="font-size: 1.5em; margin-top: 40px;">Additional Data & Supporting Materials</p>
+                <ul style="text-align: left; margin-top: 60px; font-size: 1.3em;">
+                    <li>Detailed Financial Model</li>
+                    <li>Clinical Validation Study Protocol</li>
+                    <li>Technology Architecture Diagrams</li>
+                    <li>Competitive Analysis Deep-Dive</li>
+                    <li>Customer Discovery Interview Summaries</li>
+                    <li>Regulatory Compliance Roadmap</li>
+                    <li>Advisory Board Bios</li>
+                    <li>Letter of Intent Samples</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button onclick="prevSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function updateSlideNumber() {
+            document.getElementById('slideNumber').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            updateSlideNumber();
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        updateSlideNumber();
+    </script>
+</body>
+</html>
